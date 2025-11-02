@@ -396,6 +396,8 @@
         // 强制播放视频的函数（针对微信等浏览器）
         function playVideo() {
             if (acceptedVideo) {
+                // 设置音量为 30%（0.3），可以根据需要调整：0.0-1.0
+                acceptedVideo.volume = 0.3;
                 acceptedVideo.play().catch(err => {
                     console.log('视频自动播放失败:', err);
                     // 如果自动播放失败，添加点击播放
@@ -454,6 +456,11 @@
             acceptedSection.classList.add('hidden');
             confirmSection.classList.remove('hidden');
             resetBoi();
+            // 暂停视频并重置到开头
+            if (acceptedVideo) {
+                acceptedVideo.pause();
+                acceptedVideo.currentTime = 0;
+            }
         });
 
         rejectedSection.querySelector('a').addEventListener('click', () => {
