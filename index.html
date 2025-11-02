@@ -342,7 +342,7 @@
     <section class="accepted hidden">
         <div class="accepted-body">
             <h2 class="accepted-body-title">阿蒲！阿蒲！</h2>
-            <video class="accepted-video" autoplay loop muted playsinline>
+            <video class="accepted-video" id="acceptedVideo" autoplay loop muted playsinline webkit-playsinline x5-playsinline x5-video-player-type="h5" x5-video-player-fullscreen="true">
                 <source src="pu.mp4" type="video/mp4">
                 您的浏览器不支持视频播放。
             </video>
@@ -383,6 +383,7 @@
         const boi = document.querySelector('.boi');
         const btnDelete = document.querySelector('.confirm-body-button-delete');
         const btnCancel = document.querySelector('.confirm-body-button-cancel');
+        const acceptedVideo = document.getElementById('acceptedVideo');
         const current = {
             happiness: 0.9,
             derp: 1,
@@ -391,6 +392,30 @@
         };
         const target = { ...current };
         let rejectCount = 0;
+
+        // 强制播放视频的函数（针对微信等浏览器）
+        function playVideo() {
+            if (acceptedVideo) {
+                acceptedVideo.play().catch(err => {
+                    console.log('视频自动播放失败:', err);
+                    // 如果自动播放失败，添加点击播放
+                    acceptedVideo.addEventListener('click', () => {
+                        acceptedVideo.play();
+                    }, { once: true });
+                });
+            }
+        }
+
+        // 微信浏览器检测和自动播放
+        if (typeof WeixinJSBridge !== 'undefined') {
+            WeixinJSBridge.invoke('getNetworkType', {}, function() {
+                playVideo();
+            });
+        } else {
+            document.addEventListener('WeixinJSBridgeReady', function() {
+                playVideo();
+            }, false);
+        }
 
         // 事件监听
         confirmSection.addEventListener('mousemove', onMouseMove);
@@ -401,6 +426,10 @@
             acceptedSection.classList.remove('hidden');
             target.happiness = 1; // 开心到起飞
             updateBoi();
+            // 尝试播放视频
+            setTimeout(() => {
+                playVideo();
+            }, 100);
         });
 
         btnDelete.addEventListener('click', () => {
