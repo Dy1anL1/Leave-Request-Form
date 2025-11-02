@@ -2,7 +2,7 @@
 
 一个有趣的互动式请假申请网页，通过可爱的表情、巧妙的交互设计和视频惊喜，让请假变得更加轻松有趣！
 
-本项目预览页面：https://dy1anl1.github.io/Leave-Request-Form/
+本项目预览页面：https://dy1anl1.github.io/Approval-Game/
 
 ## 项目简介
 
