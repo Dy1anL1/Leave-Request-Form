@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>请假条</title>
+    <title>求批条</title>
     <style>
         * {
             box-sizing: border-box;
@@ -33,12 +33,11 @@
         }
 
         .confirm,
-        .accepted,
         .rejected {
             position: absolute;
             display: flex;
             flex-direction: column;
-            overflow: hidden;
+            overflow: visible;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -51,8 +50,24 @@
             border-radius: 1rem;
         }
 
+        .accepted {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            overflow: auto;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 72rem;
+            max-width: 100%;
+            min-width: 34rem;
+            max-height: 100%;
+            height: auto;
+            background-color: #ffffff;
+            border-radius: 1rem;
+        }
+
         .confirm-body,
-        .accepted-body,
         .rejected-body {
             flex: 1;
             display: flex;
@@ -60,6 +75,12 @@
             justify-content: space-between;
             position: relative;
             margin: 2rem 4rem;
+            overflow: visible;
+        }
+
+        .accepted-body {
+            display: flex;
+            position: relative;
             overflow: visible;
         }
 
@@ -113,6 +134,7 @@
 
         .confirm-body-button-cancel {
             background-color: #6a4;
+            transform-origin: center center;
         }
 
         .confirm-body-button-cancel:hover {
@@ -127,6 +149,43 @@
         .accepted-body-button:hover,
         .rejected-body-button:hover {
             background-color: #81c061;
+        }
+
+        .accepted-body {
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 2rem;
+            gap: 1rem;
+        }
+
+        .accepted-body-title {
+            position: relative !important;
+            top: auto !important;
+            transform: none !important;
+            margin: 0;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            border-radius: 0.8rem;
+            font-weight: bold;
+            font-size: 2.4rem;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            letter-spacing: 0.1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .accepted-video {
+            width: 100%;
+            max-width: 50rem;
+            height: auto;
+            border-radius: 1rem;
+            margin: 1rem 0;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .accepted-body-button {
+            margin-top: 1rem;
         }
 
         .boi {
@@ -265,8 +324,8 @@
     <!-- 初始界面 -->
     <section class="confirm">
         <div class="confirm-body">
-            <h2 class="confirm-body-title">你的愚蠢大学生向你发送了一封请假申请</h2>
-            <h3 class="confirm-body-subtitle">你的学生向你发出一份请假申请，是否接受？</h3>
+            <h2 class="confirm-body-title">你的好友兼搭子向你邀请你去玩</h2>
+            <h3 class="confirm-body-subtitle">去不去蒲熠星重庆站演唱会？</h3>
             <figure class="boi" style="--happiness:0.9; --derp:1; --px:0.5; --py:0.5;">
                 <div class="boi-blush boi-blush-left"></div>
                 <div class="boi-blush boi-blush-right"></div>
@@ -274,16 +333,21 @@
                 <div class="boi-eye boi-eye-right"></div>
                 <div class="boi-mouth"></div>
             </figure>
-            <a class="confirm-body-button confirm-body-button-cancel" href="javascript:void(0)">接受</a>
-            <a class="confirm-body-button confirm-body-button-delete" href="javascript:void(0)">拒绝</a>
+            <a class="confirm-body-button confirm-body-button-cancel" href="javascript:void(0)">去</a>
+            <a class="confirm-body-button confirm-body-button-delete" href="javascript:void(0)">不去</a>
         </div>
     </section>
 
     <!-- 接受后的新界面 -->
     <section class="accepted hidden">
         <div class="accepted-body">
-            <h2 class="accepted-body-title">谢谢导员！</h2>
-            <h3 class="accepted-body-subtitle">祝老师工作顺利，天天开心！</h3>
+            <h2 class="accepted-body-title">阿蒲！阿蒲！</h2>
+            <video class="accepted-video" autoplay loop muted playsinline>
+                <source src="pu.mp4" type="video/mp4">
+                您的浏览器不支持视频播放。
+            </video>
+            <!--
+            <h3 class="accepted-body-subtitle">来来来，嗨起来！</h3>
             <figure class="boi" style="--happiness:1; --derp:0; --px:0.5; --py:0.5;">
                 <div class="boi-blush boi-blush-left"></div>
                 <div class="boi-blush boi-blush-right"></div>
@@ -291,6 +355,7 @@
                 <div class="boi-eye boi-eye-right"></div>
                 <div class="boi-mouth"></div>
             </figure>
+            -->
             <a class="accepted-body-button" href="javascript:void(0)">返回</a>
         </div>
     </section>
@@ -298,8 +363,8 @@
     <!-- 拒绝后的新界面 -->
     <section class="rejected hidden">
         <div class="rejected-body">
-            <h2 class="rejected-body-title">你的学生有点难过...</h2>
-            <h3 class="rejected-body-subtitle">但你的学生尊重你的决定，祝你一切顺利！</h3>
+            <h2 class="rejected-body-title">好好好，真给你点这么多次没失误啊 😠</h2>
+            <h3 class="rejected-body-subtitle">你个假粉！🐶</h3>
             <figure class="boi" style="--happiness:0.2; --derp:0; --px:0.5; --py:0.5;">
                 <div class="boi-blush boi-blush-left"></div>
                 <div class="boi-blush boi-blush-right"></div>
@@ -340,7 +405,13 @@
 
         btnDelete.addEventListener('click', () => {
             rejectCount++;
-            if (rejectCount >= 5) {
+            if (rejectCount >= 60) {
+                // 点击60次后显示拒绝页面
+                confirmSection.classList.add('hidden');
+                rejectedSection.classList.remove('hidden');
+                target.happiness = 0.2; // 很不开心
+                updateBoi();
+            } else if (rejectCount >= 5) {
                 btnDelete.style.position = 'absolute';
                 btnDelete.style.left = `${Math.random() * 80}%`;
                 btnDelete.style.top = `${Math.random() * 80}%`;
